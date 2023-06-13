@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tmavsia: '#111221',
+                        svetlejsia: '#41464A',
+                        action: {
+                            DEFAULT: '#F37021',
+                            hover: '#E54E07',
+                            dark: '#801E00',
+                            light: '#FF7D55',
+                        },
+                    },
+                    backgroundColor: {
+                        page: '#F8F8FA',
+                        thumbnail: {
+                            DEFAULT: '#DCE0E3',
+                            tmavsia: '#5A5F64',
+                        },
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    fontSize: {
+                        '40': '40px',
+                        '24': '24px',
+                        '14': '14px',
+                    },
+                    lineHeight: {
+                        '48': '48px',
+                        '32': '32px',
+                        '21': '21px',
+                        '24': '24px',
+                    },
+                    fontWeight: {
+                        'bold': 'bold',
+                        'regular': '400',
+                    },
+                    maxWidth: {
+                        '1140': '1140px',
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        html {
+            scroll-snap-type: y mandatory;
+        }
+
+        section {
+            scroll-snap-align: start;
+        }
+
+        .cheatOut {
+            width: 100%;
+        }
+
+        .w350 {
+            width: 100vw;
+
+        }
+
+
+
+        @media (min-width: 768px) {
+            .w350 {
+                width: 50vw;
+            }
+
+            .cheatOut {
+                width: 100%;
+            }
+        }
+
+
+        @media (min-width: 1024px) {
+            .w350 {
+                width: 350px;
+            }
+
+            .cheatOut {
+                width: calc(100% + 1vw);
+            }
+        }
+
+        @media (min-width: 1224px) {
+
+            .cheatOut {
+                width: calc(100% + 3.7%);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .cheatOut {
+                width: calc(100% + 10%);
+            }
+        }
+
+
+
+        #blogWithSlider #slider-container {
+            position: relative;
+            width: 100%;
+            height: 8px;
+            margin-top: 20px;
+        }
+
+        #blogWithSlider #slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #E4E4E7;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            position: relative;
+        }
+
+        #blogWithSlider #slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #4F46E5;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #blogWithSlider #slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #4F46E5;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        #blogWithSlider .owl-carousel {
+            transition: transform 0.5s;
+        }
+
+        #blogWithSlider .owl-carousel .owl-stage-outer {
+            overflow: visible;
+        }
+
+        #blogWithSlider .owl-carousel .owl-item {
+            opacity: 0.7;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #blogWithSlider .owl-carousel .owl-item.active,
+        #blogWithSlider .owl-carousel .owl-item.active+.owl-item,
+        #blogWithSlider .owl-carousel .owl-item.active+.owl-item+.owl-item {
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #blogWithSlider .owl-nav {
+            position: relative;
+            z-index: 1;
+            margin-top: 10px;
+        }
+
+        #blogWithSlider .owl-nav button {
+            position: relative;
+            z-index: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: color 0.3s ease-in-out;
+        }
+
+        #blogWithSlider .owl-nav button svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        #blogWithSlider .owl-nav button:hover {
+            color: #4F46E5;
+        }
+
+        #blogWithSlider .owl-nav .owl-prev {
+            margin-right: 10px;
+        }
+
+        #blogWithSlider .owl-nav .owl-next {
+            margin-left: 10px;
+        }
+
+        #blogWithSlider .owl-dots {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #blogWithSlider .owl-dots .owl-dot {
+            position: relative;
+            z-index: 1;
+            background: #E4E4E7;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        #blogWithSlider .owl-dots .owl-dot.active {
+            background: #4F46E5;
+        }
+
+        #blogWithSlider #slider-container {
+            display: none;
+        }
+    </style>
+
+
+</head>
+
+<body class="font-poppins">
+    <div class="max-w-1140 md:px-0 mx-auto sm:px-3">
+        <!-- Staticke zaciatok -->
+        <section id="blogStatic" class="flex flex-col min-h-screen pb-20 justify-center">
+            <div class="flex justify-between pb-10 pt-10 flex-wrap">
+                <h1 class="text-tmavsia font-bold leading-48 text-40">Check out the latest news</h1>
+                <button
+                    class="bg-transparent transition duration-300 ease-in-out border-2 border-thumbnail text-action hover:text-action-dark font-bold py-2 px-4 leading-24 text-14 rounded-lg">Show
+                    all
+                    articles</button>
+            </div>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                <div class="flex flex-col bg-page shadow-lg">
+                    <img class="h-197 w-full object-cover" src="assets/image-1.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Lorem ipsum dolor sit amet,
+                            consectetur
+                            adipiscing elit.</h2>
+                        <p class="text-svetlejsia  mb-2 font-regular leading-21 text-14">08.06.2023</p>
+
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-page shadow-lg">
+                    <img class="h-197 w-full object-cover" src="assets/image-2.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Nadpis blogu</h2>
+                        <p class="text-svetlejsia  mb-2 font-regular leading-21 text-14">08.06.2023</p>
+
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-page shadow-lg">
+                    <img class="h-197 w-full object-cover" src="assets/image-3.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Aenean et porttitor purus, eu
+                            sagittis magna.
+                            Nulla eget sem sodales quam congue ultrices a a lacus. Proin vel purus vel enim tincidunt
+                            vestibulum.</h2>
+                        <p class="text-svetlejsia  mb-2 font-regular leading-21 text-14">08.06.2023</p>
+
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- staticke koniec -->
+        <!-- Slider JS zaciatok -->
+        <section id="blogJsCss" class="flex flex-col min-h-screen pb-20 justify-center">
+            <div class="flex justify-between pb-10 pt-10 flex-wrap">
+                <h1 class="text-tmavsia font-bold leading-48 text-40">Check out the latest news</h1>
+                <div class="flex">
+                    <button id="carouselPrev"
+                        class="bg-transparent transition duration-300 ease-in-out border-2 border-thumbnail text-action hover:text-action-dark font-bold py-2 px-4 text-14 rounded-lg">
+                        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <button id="carouselNext"
+                        class="bg-transparent transition duration-300 ease-in-out border-2 border-thumbnail text-action hover:text-action-dark font-bold py-2 px-4 text-14 rounded-lg">
+                        <svg class="w-4 h-4 inline-block ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 overflow-x-auto owl-carousel owl-theme">
+                <div class="flex flex-col bg-page shadow-lg">
+                    <img class="h-197 w-full object-cover" src="assets/image-1.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Nadpis blogu</h2>
+                        <p class="text-svetlejsia mb-2 font-regular leading-21 text-14">08.06.2023</p>
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-page shadow-lg">
+                    <img class="h-197 w-full object-cover" src="assets/image-2.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.</h2>
+                        <p class="text-svetlejsia mb-2 font-regular leading-21 text-14">08.06.2023</p>
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-page shadow-lg">
+                    <img class="h-197 w-full object-cover" src="assets/image-3.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Aenean et porttitor purus, eu
+                            sagittis magna. Nulla eget sem sodales quam congue ultrices a a lacus. Proin vel purus vel
+                            enim tincidunt vestibulum.</h2>
+                        <p class="text-svetlejsia mb-2 font-regular leading-21 text-14">08.06.2023</p>
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-page shadow-lg">
+                    <img class="h-197 w-full object-cover" src="assets/image-3.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Proin vel purus vel
+                            enim tincidunt vestibulum.</h2>
+                        <p class="text-svetlejsia mb-2 font-regular leading-21 text-14">08.06.2023</p>
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Slider Js koniec -->
+
+        <!-- SliderBonus zaciatok -->
+
+        <section id="blogWithSlider" class="flex flex-col min-h-screen pb-20 justify-center">
+            <div class="flex justify-between pb-10 pt-10 flex-wrap">
+                <h1 class="text-tmavsia font-bold leading-48 text-40">Check out the latest news</h1>
+                <div class="flex">
+                    <button id="carouselSliderPrev"
+                        class="bg-transparent transition duration-300 ease-in-out border-2 border-thumbnail text-action hover:text-action-dark font-bold py-2 px-4 text-14 rounded-lg">
+                        <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <button id="carouselSliderNext"
+                        class="bg-transparent transition duration-300 ease-in-out border-2 border-thumbnail text-action hover:text-action-dark font-bold py-2 px-4 text-14 rounded-lg">
+                        <svg class="w-4 h-4 inline-block ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div
+                class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 overflow-x-auto owl-carousel owl-theme cheatOut">
+                <div class="flex flex-col bg-page shadow-lg ">
+                    <img class="h-197 w-full object-cover" src="assets/image-1.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Nadpis blogu</h2>
+                        <p class="text-svetlejsia mb-2 font-regular leading-21 text-14">08.06.2023</p>
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-page shadow-lg ">
+                    <img class="h-197 w-full object-cover" src="assets/image-2.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.</h2>
+                        <p class="text-svetlejsia mb-2 font-regular leading-21 text-14">08.06.2023</p>
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-page shadow-lg ">
+                    <img class="h-197 w-full object-cover" src="assets/image-3.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Aenean et porttitor purus, eu
+                            sagittis magna. Nulla eget sem sodales quam congue ultrices a a lacus. Proin vel purus vel
+                            enim tincidunt vestibulum.</h2>
+                        <p class="text-svetlejsia mb-2 font-regular leading-21 text-14">08.06.2023</p>
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">Read
+                            more</button>
+                    </div>
+                </div>
+                <div class="flex flex-col bg-page shadow-lg">
+                    <img class="h-197 w-full object-cover" src="assets/image-4.jpg" alt="Obrázok blogu">
+                    <div class="p-6 flex-grow">
+                        <h2 class="text-xl font-bold mb-4 text-tmavsia line-clamp-4">Nová karta</h2>
+                        <p class="text-svetlejsia mb-2 font-regular leading-21 text-14">08.06.2023</p>
+                    </div>
+                    <div class="p-4 mb-8">
+                        <button
+                            class="bg-transparent border-b border-b-4 border-thumbnail duration-300 ease-in-out font-bold hover:text-action-dark leading-24 mx-2 pb-0 text-14 text-action transition">
+                            Read more
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="slider-container">
+                <input type="range" id="slider" class="slider-default" min="0" step="1" value="0" />
+            </div>
+
+
+        </section>
+
+
+        <!-- SliderBonus koniec -->
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var carousel = $('#blogJsCss .owl-carousel');
+
+            carousel.owlCarousel({
+                loop: true,
+                margin: 30,
+                dots: false,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    600: {
+                        items: 2,
+                    },
+                    1000: {
+                        items: 3,
+                    }
+                }
+            });
+
+            // Carousel navigation
+            $('#carouselPrev').click(function () {
+                carousel.trigger('prev.owl.carousel');
+            });
+
+            $('#carouselNext').click(function () {
+                carousel.trigger('next.owl.carousel');
+            });
+
+            var maxCardHeight = 0;
+
+            $(".owl-carousel .flex.flex-col").each(function () {
+                var cardHeight = $(this).outerHeight();
+                if (cardHeight > maxCardHeight) {
+                    maxCardHeight = cardHeight;
+                }
+            });
+
+            $(".owl-carousel .flex.flex-col").css("height", maxCardHeight + "px");
+
+        });
+
+        $(document).ready(function () {
+            var carousel = $('#blogWithSlider .owl-carousel');
+            var cardCount = carousel.find('.flex.flex-col').length;
+            carousel.owlCarousel({
+                loop: true,
+                margin: 30,
+                dots: false,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                    },
+                    600: {
+                        items: 2,
+                    },
+                    1000: {
+                        items: 3.5,
+                    }
+                }
+            });
+            $('#slider').attr('max', cardCount - 1);
+            // Carousel navigation
+            $('#carouselSliderPrev').click(function () {
+                carousel.trigger('prev.owl.carousel');
+            });
+
+            $('#carouselSliderNext').click(function () {
+                carousel.trigger('next.owl.carousel');
+            });
+
+            var maxCardHeight = 0;
+
+            $(".owl-carousel .flex.flex-col").each(function () {
+                var cardHeight = $(this).outerHeight();
+                if (cardHeight > maxCardHeight) {
+                    maxCardHeight = cardHeight;
+                }
+            });
+
+            $(".owl-carousel .flex.flex-col").css("height", maxCardHeight + "px");
+
+            // Slider navigation
+            var slider = $('#slider');
+            slider.on('input', function () {
+                var position = $(this).val();
+                carousel.trigger('to.owl.carousel', [position, 300]);
+            });
+
+        });
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
